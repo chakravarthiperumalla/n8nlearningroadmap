@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Roadmap: Intermediate (20 Days)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .module {
+            background-color: #fff;
+            border-left: 5px solid #3498db;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .day {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        h2 { color: #2980b9; border-bottom: 2px solid #2980b9; padding-bottom: 10px; }
+        h3 { color: #e67e22; margin-top: 0; }
+        .practice { background-color: #e8f4fd; padding: 10px; border-radius: 4px; border-left: 3px solid #3498db; }
+        .quiz { background-color: #f9f9f9; padding: 10px; border: 1px dashed #ccc; margin-top: 10px; }
+        .quiz-q { font-weight: bold; }
+        .quiz-a { font-style: italic; color: #27ae60; margin-bottom: 10px; }
+        .capstone { background-color: #27ae60; color: white; padding: 20px; border-radius: 8px; }
+        .resources { background-color: #fff; padding: 20px; border-radius: 8px; border: 1px solid #ddd; }
+        ul { padding-left: 20px; }
+        code { background-color: #eee; padding: 2px 4px; border-radius: 3px; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>DevOps Learning Roadmap</h1>
+    <p><strong>Level:</strong> Intermediate | <strong>Duration:</strong> 20 Days | <strong>Commitment:</strong> 2 Hours/Day</p>
+    <p>Master the lifecycle of software delivery through Infrastructure as Code, Container Orchestration, and GitOps.</p>
+</header>
+
+<section class="overview">
+    <h2>Course Overview</h2>
+    <p>This roadmap transitions you from basic automation to a modern Cloud Native DevOps mindset. You will focus on Terraform, Kubernetes, GitHub Actions, and Observability. Prerequisites: Basic Linux CLI, understanding of Git, and one programming language (Python/Go/Bash).</p>
+</section>
+
+<!-- Module 1 -->
+<div class="module">
+    <h2>Module 1: Advanced Infrastructure as Code (Days 1-4)</h2>
+    
+    <div class="day">
+        <h3>Day 1: Terraform Modules & Providers</h3>
+        <p><strong>Focus:</strong> Structuring Terraform for reusability.</p>
+        <ul>
+            <li>Nested modules vs. Root modules.</li>
+            <li>Provider configuration and alias usage for multi-region deployments.</li>
+            <li>Variable validation and local values.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Create a reusable Terraform module for an AWS S3 bucket with versioning and encryption, then call it from a root configuration.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. What is the benefit of using the 'source' argument in a module block?</p>
+            <p class="quiz-a">A: It allows you to reuse configuration code from local paths or remote registries like GitHub.</p>
+            <p class="quiz-q">2. How do you handle multiple AWS regions in the same Terraform plan?</p>
+            <p class="quiz-a">A: By using provider aliases and passing the provider to the module or resource.</p>
+        </div>
+    </div>
+
+    <div class="day">
+        <h3>Day 2: Terraform State Management</h3>
+        <p><strong>Focus:</strong> Remote backends and state locking.</p>
+        <ul>
+            <li>Remote state storage (S3/GCS).</li>
+            <li>State locking with DynamoDB.</li>
+            <li>Handling <code>terraform.tfstate</code> in a team environment.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Configure an S3 backend with DynamoDB locking for your Terraform project.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. Why should you never commit .tfstate files to Git?</p>
+            <p class="quiz-a">A: They contain sensitive information in plain text and cause conflicts in team settings.</p>
+        </div>
+    </div>
+
+    <div class="day">
+        <h3>Day 3: Ansible Fundamentals for DevOps</h3>
+        <p><strong>Focus:</strong> Configuration management vs Provisioning.</p>
+        <ul>
+            <li>Inventory management (Static vs Dynamic).</li>
+            <li>Playbooks, Roles, and Handlers.</li>
+            <li>Idempotency in Ansible.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Write an Ansible playbook to install Nginx and configure a custom HTML page on a local VM or EC2 instance.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. What does 'idempotency' mean in the context of Ansible?</p>
+            <p class="quiz-a">A: Executing the same operation multiple times has the same effect as a single execution, without changing the state unnecessarily.</p>
+        </div>
+    </div>
+
+    <div class="day">
+        <h3>Day 4: The IaC Pipeline (TF + Ansible)</h3>
+        <p><strong>Focus:</strong> Orchestrating the two tools.</p>
+        <ul>
+            <li>Using Terraform to provision infra and Ansible to configure software.</li>
+            <li>Using Terraform's <code>local-exec</code> or <code>remote-exec</code> (and why to avoid them).</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Use Terraform to launch an EC2 and automatically trigger an Ansible playbook to configure it upon creation.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. Which tool is better for 'Day 0' (Infrastructure creation)?</p>
+            <p class="quiz-a">A: Terraform.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Module 2 -->
+<div class="module">
+    <h2>Module 2: Containerization & Kubernetes Deep Dive (Days 5-9)</h2>
+
+    <div class="day">
+        <h3>Day 5: Docker Advanced Patterns</h3>
+        <p><strong>Focus:</strong> Optimization and Security.</p>
+        <ul>
+            <li>Multi-stage builds for smaller images.</li>
+            <li>Distroless images and Alpine-based images.</li>
+            <li>Docker networking (Bridge, Host, Overlay).</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Refactor a bulky Python or Node.js Dockerfile into a multi-stage build, reducing size by >50%.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. What is the primary advantage of a multi-stage build?</p>
+            <p class="quiz-a">A: It keeps the production image small by excluding build-time dependencies.</p>
+        </div>
+    </div>
+
+    <div class="day">
+        <h3>Day 6: Kubernetes Architecture & Pods</h3>
+        <p><strong>Focus:</strong> Control Plane and Data Plane.</p>
+        <ul>
+            <li>API Server, Etcd, Scheduler, Controller Manager.</li>
+            <li>Pod lifecycle and Init containers.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Deploy a multi-container pod (Sidecar pattern) where one container logs to a shared volume and another reads it.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. Which component is the source of truth for the cluster state?</p>
+            <p class="quiz-a">A: Etcd.</p>
+        </div>
+    </div>
+
+    <div class="day">
+        <h3>Day 7: K8s Deployments & Services</h3>
+        <p><strong>Focus:</strong> Scaling and Exposure.</p>
+        <ul>
+            <li>Rolling updates and rollbacks.</li>
+            <li>Service types: ClusterIP, NodePort, LoadBalancer.</li>
+            <li>Selectors and Labels.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Deploy an app with 3 replicas. Perform a rolling update to a new version and then roll it back using <code>kubectl</code>.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. How do you check the rollout history of a deployment?</p>
+            <p class="quiz-a">A: <code>kubectl rollout history deployment/[name]</code></p>
+        </div>
+    </div>
+
+    <div class="day">
+        <h3>Day 8: Storage and Config in K8s</h3>
+        <p><strong>Focus:</strong> Persistence and Decoupling.</p>
+        <ul>
+            <li>PV, PVC, and StorageClasses.</li>
+            <li>ConfigMaps and Secrets (and their security limitations).</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Deploy a MySQL pod that uses a Persistent Volume Claim to store data.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. What happens to a PVC when a Pod is deleted?</p>
+            <p class="quiz-a">A: The PVC remains (unless explicitly deleted), allowing new pods to mount the same data.</p>
+        </div>
+    </div>
+
+    <div class="day">
+        <h3>Day 9: Helm Package Management</h3>
+        <p><strong>Focus:</strong> Templating K8s manifests.</p>
+        <ul>
+            <li>Chart structure (values.yaml, templates/).</li>
+            <li>Helm install, upgrade, and list.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Create a custom Helm chart for a simple web application and deploy it using a values file.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. Where does Helm store the release information by default?</p>
+            <p class="quiz-a">A: In Secrets within the namespace of the release.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Module 3 -->
+<div class="module">
+    <h2>Module 3: Continuous Integration & Deployment (Days 10-13)</h2>
+
+    <div class="day">
+        <h3>Day 10: GitHub Actions Workflows</h3>
+        <p><strong>Focus:</strong> Event-driven CI.</p>
+        <ul>
+            <li>YAML syntax: triggers, jobs, steps.</li>
+            <li>Contexts, secrets, and environment variables.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Create a GitHub Action that runs unit tests on every Pull Request to the <code>main</code> branch.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. What is the difference between a Step and a Job in GHA?</p>
+            <p class="quiz-a">A: Jobs run in parallel by default on different runners; Steps run sequentially within a job.</p>
+        </div>
+    </div>
+
+    <div class="day">
+        <h3>Day 11: CI for Containers</h3>
+        <p><strong>Focus:</strong> Building and pushing images.</p>
+        <ul>
+            <li>GitHub Container Registry (GHCR) or DockerHub integration.</li>
+            <li>Docker build-push-action.</li>
+            <li>Semantic versioning for images.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Build a CI pipeline that builds a Docker image and pushes it to a registry only when a Git tag is created.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. Why should you avoid using the <code>:latest</code> tag in production?</p>
+            <p class="quiz-a">A: It makes deployments non-deterministic and rollbacks difficult.</p>
+        </div>
+    </div>
+
+    <div class="day">
+        <h3>Day 12: GitOps with ArgoCD</h3>
+        <p><strong>Focus:</strong> Declarative Continuous Delivery.</p>
+        <ul>
+            <li>The GitOps philosophy.</li>
+            <li>Connecting ArgoCD to a K8s cluster and a Git repo.</li>
+            <li>Automatic vs Manual synchronization.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Install ArgoCD in your cluster and deploy an application by pointing it to a GitHub repository containing K8s manifests.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. What is "Configuration Drift"?</p>
+            <p class="quiz-a">A: When the actual state of the cluster differs from the desired state defined in Git.</p>
+        </div>
+    </div>
+
+    <div class="day">
+        <h3>Day 13: Deployment Strategies</h3>
+        <p><strong>Focus:</strong> Reducing downtime and risk.</p>
+        <ul>
+            <li>Blue/Green Deployments.</li>
+            <li>Canary Releases using Ingress Nginx or Istio.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Configure a Canary deployment using Nginx Ingress annotations to send 10% of traffic to a "v2" service.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. Which strategy requires double the infrastructure resources during the release?</p>
+            <p class="quiz-a">A: Blue/Green deployment.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Module 4 -->
+<div class="module">
+    <h2>Module 4: Observability & Monitoring (Days 14-16)</h2>
+
+    <div class="day">
+        <h3>Day 14: Prometheus Metrics</h3>
+        <p><strong>Focus:</strong> Pull-based monitoring.</p>
+        <ul>
+            <li>Prometheus Architecture.</li>
+            <li>PromQL basics.</li>
+            <li>Node Exporter and Kube-state-metrics.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Install Prometheus via Helm and use PromQL to find the CPU usage of a specific pod.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. Does Prometheus pull or push metrics from applications?</p>
+            <p class="quiz-a">A: It pulls (scrapes) metrics.</p>
+        </div>
+    </div>
+
+    <div class="day">
+        <h3>Day 15: Grafana Dashboards</h3>
+        <p><strong>Focus:</strong> Visualizing data.</p>
+        <ul>
+            <li>Connecting Data Sources.</li>
+            <li>Building custom dashboards.</li>
+            <li>Setting up alerts (Slack/Email).</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Create a Grafana dashboard showing Pod CPU, Memory, and Disk I/O. Set an alert for high CPU.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. What is a "DataSource" in Grafana?</p>
+            <p class="quiz-a">A: A connection to a backend storage like Prometheus, Loki, or InfluxDB.</p>
+        </div>
+    </div>
+
+    <div class="day">
+        <h3>Day 16: Log Management (Loki/ELK)</h3>
+        <p><strong>Focus:</strong> Centralized logging.</p>
+        <ul>
+            <li>Log shipping (Fluentd/Promtail).</li>
+            <li>Querying logs with LogQL.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Deploy Loki and Promtail. Use Grafana to view live logs from your Kubernetes namespace.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. Why is centralized logging important in microservices?</p>
+            <p class="quiz-a">A: Because pods are ephemeral; if they die, their local logs are lost.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Module 5 -->
+<div class="module">
+    <h2>Module 5: DevSecOps (Days 17-18)</h2>
+
+    <div class="day">
+        <h3>Day 17: Vulnerability Scanning</h3>
+        <p><strong>Focus:</strong> Shifting security left.</p>
+        <ul>
+            <li>Static Analysis (SAST) and Container scanning.</li>
+            <li>Using Trivy or Snyk.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Integrate a Trivy scan into your GitHub Actions pipeline to fail the build if "High" vulnerabilities are found in the Docker image.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. When is the best time to scan for vulnerabilities?</p>
+            <p class="quiz-a">A: During the CI process, before the image is pushed to a registry.</p>
+        </div>
+    </div>
+
+    <div class="day">
+        <h3>Day 18: K8s Network Policies & RBAC</h3>
+        <p><strong>Focus:</strong> Hardening the cluster.</p>
+        <ul>
+            <li>Least privilege principle in RBAC.</li>
+            <li>Namespace isolation with NetworkPolicies.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Write a NetworkPolicy that only allows traffic to your Database pod from your Web App pod.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. What does RBAC stand for?</p>
+            <p class="quiz-a">A: Role-Based Access Control.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Module 6 -->
+<div class="module">
+    <h2>Module 6: Advanced Cloud Native (Days 19-20)</h2>
+
+    <div class="day">
+        <h3>Day 19: Introduction to Service Mesh</h3>
+        <p><strong>Focus:</strong> Microservice communication.</p>
+        <ul>
+            <li>Mutual TLS (mTLS).</li>
+            <li>Traffic splitting and Observability at the network layer.</li>
+            <li>Istio vs. Linkerd.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Install Linkerd and "mesh" a sample application to observe traffic latency between services.</div>
+        <div class="quiz">
+            <p class="quiz-q">1. What is the primary component injected into pods by a service mesh?</p>
+            <p class="quiz-a">A: A sidecar proxy (e.g., Envoy).</p>
+        </div>
+    </div>
+
+    <div class="day">
+        <h3>Day 20: Full Review & Final Capstone</h3>
+        <p><strong>Focus:</strong> Consolidation of all skills.</p>
+        <ul>
+            <li>Reviewing the end-to-end flow.</li>
+            <li>Optimizing pipelines for speed.</li>
+        </ul>
+        <div class="practice"><strong>Task:</strong> Review all documentation and prepare for the Capstone Project.</div>
+    </div>
+</div>
+
+<div class="capstone">
+    <h2>🚀 Final Capstone Project</h2>
+    <p><strong>Scenario:</strong> You are tasked with deploying a secure, scalable 3-tier application (Frontend, Backend, DB) with full automation.</p>
+    <ul>
+        <li><strong>Infrastructure:</strong> Use <strong>Terraform</strong> to provision a Kubernetes cluster (EKS/GKE or local Kind/Minikube).</li>
+        <li><strong>CI/CD:</strong> Set up a <strong>GitHub Action</strong> to build Docker images and update a Git manifest repo.</li>
+        <li><strong>CD:</strong> Use <strong>ArgoCD</strong> to deploy the application to K8s.</li>
+        <li><strong>Security:</strong> Implement <strong>Trivy</strong> scans and <strong>Network Policies</strong>.</li>
+        <li><strong>Monitoring:</strong> Provide a <strong>Grafana</strong> dashboard link showing the app's health.</li>
+    </ul>
+</div>
+
+<div class="resources">
+    <h2>Recommended Resources</h2>
+    <ul>
+        <li><strong>Documentation:</strong> Kubernetes.io, Terraform.io, Helm.sh.</li>
+        <li><strong>Interactive Labs:</strong> Killercoda (K8s), Katacoda (various).</li>
+        <li><strong>Books:</strong> <em>"The Phoenix Project"</em> (Culture), <em>"Terraform up & Running"</em> (Technical).</li>
+        <li><strong>Community:</strong> CNCF Slack, Reddit r/devops.</li>
+    </ul>
+</div>
+
+</body>
+</html>
